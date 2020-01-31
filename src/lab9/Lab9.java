@@ -1,8 +1,6 @@
 package lab9;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author JeannieMcCarthy
@@ -11,9 +9,9 @@ import java.util.Scanner;
 public class Lab9 {
 	public static void main(String[] args) {
 		Scanner scnr = new Scanner(System.in);
-		int userChoice;
-		//replaced with validator //boolean goAgain = false; 
+		int userChoice; 
 		String goAgain = "yes";
+		boolean inStock = true;
 		Map<Integer, String> menuIndex = Methods9.getMenuIndex();
 		Map<String, Double> menu = Methods9.getMenu();
 		ArrayList<String> titles = new ArrayList<>();
@@ -22,10 +20,12 @@ public class Lab9 {
 		// Welcome user
 		System.out.println("Welcome to Literally The Greatest!");
 		System.out.println("What's your story?\n");
-		// call a method to display menu
-		Methods9.printMenu();
-
+		
 		do {
+			if (inStock) {
+				// call a method to display menu
+				Methods9.printMenu();
+			}
 			// ask for user input
 			System.out.println("\nWhich book would you like to purchase? Enter the number on the menu:");
 			userChoice = scnr.nextInt();
@@ -33,7 +33,7 @@ public class Lab9 {
 			
 			//check if requested item exists
 			if (Methods9.isOnMenu(userChoice)) {
-				
+				inStock = true;
 				// add chosen option to parallel ArrayLists
 				//add value of menuIndex (title) at key (userChoice) to titles ArrayList
 				titles.add(menuIndex.get(userChoice));
@@ -43,16 +43,16 @@ public class Lab9 {
 				System.out.println("Added " + menuIndex.get(userChoice) + 
 						" at $" + menu.get(menuIndex.get(userChoice)) + " to your cart.\n");
 			}
-			else {
+			else {//if item does not exist
 				System.out.println("That item does not appear to be in stock.");
+				inStock = false;
 				continue;
 			}
 			// ask user if want another
 			System.out.println("Would you like to continue shopping? y to continue, n to checkout:");
 			goAgain = Validator.yesOrNo(scnr);
-			//replaced with validator//goAgain = scnr.nextLine().toLowerCase().startsWith("y");
+			
 		}while (goAgain.equals("yes"));
-		//replaced with validator//} while (goAgain);
 		
 		//End shopping, display cart
 		System.out.println("Thanks for shopping with us! Here's your cart:\n");
