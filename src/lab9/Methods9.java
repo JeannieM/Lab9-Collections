@@ -69,6 +69,11 @@ public class Methods9 {
 		}
 		return lowIndex;
 	}
+	
+	public static boolean isOnMenu(String userChoice) {
+		Map<String, Double> menu = getMenu();
+		return (menu.containsKey(userChoice)) ? true : false;
+	}
 }
 /* Use Validator
  * CHALLENGE Add number system. Prompt user to request menu any time. 

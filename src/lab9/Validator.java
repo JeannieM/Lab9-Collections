@@ -150,9 +150,10 @@ public class Validator {
 		
 		String input;
 		boolean tryAgain = true;
-		
+		input = scnr.nextLine();
+		//scnr.nextLine();
 		do {
-			input = scnr.nextLine();
+			
 			if (input.toLowerCase().startsWith("y")) {
 				return "yes";
 			}
@@ -162,6 +163,7 @@ public class Validator {
 			else {
 				System.out.println("Please enter either yes or no: ");
 				input = scnr.nextLine();
+				//scnr.nextLine();//clear?
 			}
 			
 		}while(tryAgain);
